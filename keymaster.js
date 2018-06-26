@@ -62,6 +62,12 @@
       for(k in _mods) _mods[k] = event[modifierMap[k]];
   };
 
+  function resetModifiers() {
+    for(k in _mods) _mods[k] = false;
+    for(k in _MODIFIERS) assignKey[k] = false;
+    _downKeys = [];
+  };
+
   // handle keydown event
   function dispatch(event) {
     var key, handler, k, i, modifiersMatch, scope;
@@ -97,6 +103,7 @@
       // see if it's in the current scope
       if(handler.scope == scope || handler.scope == 'all'){
         // call the handler and stop the event if neccessary
+        resetModifiers();
         if (_downKeys.length == (handler.mods.length + 1) && checkKeys(handler.key)) {
           if(handler.method(event, handler)===false){
             if(event.preventDefault) event.preventDefault();
@@ -132,12 +139,6 @@
       _mods[key] = false;
       for(k in _MODIFIERS) if(_MODIFIERS[k] == key) assignKey[k] = false;
     }
-  };
-
-  function resetModifiers() {
-    for(k in _mods) _mods[k] = false;
-    for(k in _MODIFIERS) assignKey[k] = false;
-    _downKeys = [];
   };
 
   // parse and assign shortcut
