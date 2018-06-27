@@ -99,12 +99,10 @@
     // for each potential shortcut
     for (i = 0; i < _handlers[key].length; i++) {
       handler = _handlers[key][i];
-
       // see if it's in the current scope
       if(handler.scope == scope || handler.scope == 'all'){
         // call the handler and stop the event if neccessary
         if (_downKeys.length == (handler.mods.length + 1) && checkKeys(handler.key)) {
-          resetModifiers();
           if(handler.method(event, handler)===false){
             if(event.preventDefault) event.preventDefault();
               else event.returnValue = false;
@@ -114,6 +112,8 @@
         }
       }
     }
+    // after we're done firing every possible event, reset the state
+    resetModifiers();
   };
 
   function checkKeys(key) {
