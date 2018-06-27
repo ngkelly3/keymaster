@@ -102,7 +102,7 @@
       // see if it's in the current scope
       if(handler.scope == scope || handler.scope == 'all'){
         // call the handler and stop the event if neccessary
-        if (_downKeys.length == (handler.mods.length + 1) && checkKeys(handler.key)) {
+        if (totalKeysfromDownKeys(_downKeys) == (handler.mods.length + 1) && checkKeys(handler.key)) {
           if(handler.method(event, handler)===false){
             if(event.preventDefault) event.preventDefault();
               else event.returnValue = false;
@@ -113,8 +113,22 @@
       }
     }
     // after we're done firing every possible event, reset the state
+    console.log(totalKeysfromDownKeys(_downKeys));
+    console.log(_downKeys);
     resetModifiers();
   };
+
+  function totalKeysfromDownKeys(keys) {
+    totalModifiers = 0;
+    for (mod in _mods) {
+      if (_mods[mod]) {
+        if (!keys.includes(parseInt(mod))) {
+          totalModifiers++;
+        }
+      }
+    }
+    return keys.length + totalModifiers;
+  }
 
   function checkKeys(key) {
     var keys = key.split('+');

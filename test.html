@@ -27,7 +27,7 @@
   <p>
     At any time, try pressing ⌘+right, shift+left or ctrl+shift+alt+d.
   </p>
-  
+
   <p>
     When a input, a select or a textarea element is focused, key inputs should be ignored.
   </p>
@@ -41,12 +41,12 @@
       console.log('Hijacked Command+R or Ctrl+R, damn!');
       return false;
     });
-    
+
     key('i', function(){
       key.setScope('issues');
       console.log('Switched to "issues" scope. Command+R or Ctrl+R is now no longer reloading...');
     });
-    
+
     key('i', function(){
       console.log('(example of multiple assignment)');
     });
@@ -75,10 +75,18 @@
       return false;
     });
 
+    key('ctrl+n+/', function() {
+      console.log("trying a combination key press");
+    })
+
+    key('ctrl+alt+n', function() {
+      console.log("trying combination press with only one special key");
+    })
+
     key('/', function(){ console.log('/') });
     key('shift+]', function(){ console.log('shift+]') });
 
-    setInterval(function () { 
+    setInterval(function () {
         console.log('All keys currently down: ' + key.getPressedKeyCodes());
         if (key.isPressed(77)) {
             console.log('M key is currently down');
