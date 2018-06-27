@@ -79,6 +79,7 @@
     // after we're done firing every possible event, reset the state
     console.log("KEYMASTER -- TOTAL KEYS:")
     console.log(totalKeysfromDownKeys(_downKeys));
+    console.log(_downKeys);
     console.log("KEYMASTER -- END LOG")
     // if a modifier key, set the key.<modifierkeyname> property to true and return
     if(key == 93 || key == 224) key = 91; // right command on webkit, command on Gecko
