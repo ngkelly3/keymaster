@@ -76,7 +76,10 @@
     if (index(_downKeys, key) == -1) {
         _downKeys.push(key);
     }
-
+    // after we're done firing every possible event, reset the state
+    console.log("KEYMASTER -- TOTAL KEYS:")
+    console.log(totalKeysfromDownKeys(_downKeys));
+    console.log("KEYMASTER -- END LOG")
     // if a modifier key, set the key.<modifierkeyname> property to true and return
     if(key == 93 || key == 224) key = 91; // right command on webkit, command on Gecko
     if(key in _mods) {
@@ -112,10 +115,6 @@
         }
       }
     }
-    // after we're done firing every possible event, reset the state
-    console.log(totalKeysfromDownKeys(_downKeys));
-    console.log(_downKeys);
-    resetModifiers();
   };
 
   function totalKeysfromDownKeys(keys) {
